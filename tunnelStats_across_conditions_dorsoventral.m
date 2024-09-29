@@ -1,67 +1,36 @@
-%plot statistical measures across tunnel conditions
-%copy for 2021/22 dorso ventral tunnel paper
+%plot figures and statistical results across tunnel conditions
 
 clear all;close all
 
 
 %% select input directories
-cd D:\Nextcloud\Home\Behaviour\Tunnel\2018-2020_dorsal_ventral_Maximilian_Rebecca
+cd 'flightData'
 
-%symmetrical
-% resDirName='OF_d_v_2';  inputDirs={'20181116_all5C','20181128_lateral_ladders','20181108_ventral_ladder','20181107_dorsal_ladder'};
-% inputDirs={'20181116_all5C','20181109_ventralleft_halfladder','20181110_ventralright_halfladder','20181112_dorsalleft_halfladder','20181111_dorsalright_halfladder'};
-% inputDirs={'20181116_all5C','20181109_ventralleft_halfladder','20181110_ventralright_halfladder','20181112_dorsalleft_halfladder','20181111_dorsalright_halfladder','20201106_half_longstripes_room','20201106_half_longstripes_wall'};
-% inputDirs={'20181116_all5C','20181105_ventral_switch1','20181106_ventral_switch2','20181101_dorsal_switch1','20181103_dorsal_switch2'};
-% inputDirs={'20181126_contrast_50c','20181120_switch1_50contrast','20181121_switch2_50contrast','20181123_ladder_50contrast'};
-% inputDirs={'20201209_crossstripes_ventral','20201212_crossstripes_dorsal','20201210_crossstripes_dorsal_ventral'};
-% inputDirs={'20201027_crosstripes_dorsal_room','20201027_crosstripes_dorsal_wall','20181108_lateralleft_ladder','20181109_lateralright_ladder','20201028_crosstripes_dorsal_wall_verticalstripes_room','20201030_crosstripes_dorsal_room_verticalstripes_wall'};
-% resDirName='check50Switch'; inputDirs={'20181126_contrast_50c','20181101_dorsal_switch1','20181120_switch1_50contrast','20181103_dorsal_switch2','20181121_switch2_50contrast'};
-% resDirName='lateralOFSwitch'; inputDirs={'20181108_lateralleft_ladder','20181103_dorsal_switch2','20181127_leftLadder_switch2','20181109_lateralright_ladder','20181101_dorsal_switch1','20181128_rightladder_switch1'};
-% resDirName='OF_d_v'; inputDirs={'20201209_crossstripes_ventral','20201212_crossstripes_dorsal','20201210_crossstripes_dorsal_ventral'};
-% resDirName='long_cross_d_v'; inputDirs={'20181109_ventralleft_halfladder','20181110_ventralright_halfladder','20201106_longstripes_dorsal_room','20201027_crosstripes_dorsal_wall','20201028_crosstripes_dorsal_wall_verticalstripes_room','20201104_longstripes_dorsal_wall','20201027_crosstripes_dorsal_room','20201030_crosstripes_dorsal_room_verticalstripes_wall'};
-% resDirName='long_cross_d_2'; inputDirs={'2023020_contrast_5c_ALL','20201112_longstripes_dorsal_all','20201212_crossstripes_dorsal','20201106_longstripes_dorsal_room','20201027_crosstripes_dorsal_wall','20201028_crosstripes_dorsal_wall_verticalstripes_room','20201104_longstripes_dorsal_wall','20201027_crosstripes_dorsal_room','20201030_crosstripes_dorsal_room_verticalstripes_wall'};
-resDirName='long_cross_d_v_2'; inputDirs={'2023020_contrast_5c_ALL','20201208_longstripes_ventral','20201209_crossstripes_ventral_resort','20201112_longstripes_dorsal_all','20201212_crossstripes_dorsal','20201210_crossstripes_dorsal_ventral'};
-% resDirName='switch_allswitch'; inputDirs={'20181105_ventral_switch1','20181106_ventral_switch2','20181101_dorsal_switch1','20181103_dorsal_switch2','20201114_longstripes_switch2_dorsal','20201114_longstripes_switch1_dorsal'};
-% resDirName='lateralOF_dOF'; inputDirs={'20181109_lateralright_ladder','20201027_crosstripes_dorsal_room','20201030_crosstripes_dorsal_room_verticalstripes_wall','20181108_lateralleft_ladder','20201027_crosstripes_dorsal_wall','20201028_crosstripes_dorsal_wall_verticalstripes_room'};
-% resDirName='size_stripes_d_v'; inputDirs={'20181113_ventral_smallladder','20181108_ventral_ladder','20181116_largeladder_ventral','20181113_dorsal_smallladder','20181107_dorsal_ladder','20181115_largeladder_dorsal'};
-% resDirName='size_stripes_d'; inputDirs={'20181113_dorsal_smallladder','20181107_dorsal_ladder','20181115_largeladder_dorsal'};
-% resDirName='long_cross_d_v'; inputDirs={'20201106_longstripes_dorsal_room','20201027_crosstripes_dorsal_wall','20201028_crosstripes_dorsal_wall_verticalstripes_room','20201104_longstripes_dorsal_wall','20201027_crosstripes_dorsal_room','20201030_crosstripes_dorsal_room_verticalstripes_wall'};
-% 2023020_contrast_5c_ALL
-% 20201101_contrast_5c
+%select a variable number of .mat files in the right order
+% if exist('inputDirs')==0
+% count=0;
+% uiind=1;
+% inputDirs=cell(length(dir)-2,1);%give it maximum length
+% while uiind==1
+% tempDirs=uigetdir;
+% count=count+1;
+% inputDirs{count}=tempDirs;
+% if tempDirs==0
+%     uiind=0;
+% end
+% end
+% inputDirs(count:end)=[];%delete empty entries
+% end
 
-%area 2020
-% resDirName='OF_d_v_2020_area'; inputDirs={'2023020_contrast_5c_ALL','20201208_longstripes_ventral','20201209_crossstripes_ventral','20201112_longstripes_dorsal_all','20201212_crossstripes_dorsal','20201210_crossstripes_dorsal_ventral'};
-
-
-
-%for area analysis of old data
-% cd D:\Nextcloud\Home\Behaviour\Tunnel\2018-2020_dorsal_ventral_Maximilian_Rebecca\AREA_analysis\
-% resDirName='OF_d_v_area';  inputDirs={'20181116_all5C','20181128_lateral_ladders','20181108_ventral_ladder','20181107_dorsal_ladder'};
-% resDirName='switch_area'; inputDirs={'20181116_all5C','20181105_ventral_switch1','20181106_ventral_switch2','20181101_dorsal_switch1','20181103_dorsal_switch2'};
-% resDirName='size_stripes_d_v_area'; inputDirs={'20181116_all5C','20181113_ventral_smallladder','20181108_ventral_ladder','20181116_largeladder_ventral','20181113_dorsal_smallladder','20181107_dorsal_ladder','20181115_largeladder_dorsal'};
-% resDirName='OF_d_v_2_area';  inputDirs={'20181116_all5C','20181109_lateralright_ladder','20181108_lateralleft_ladder','20181128_lateral_ladders','20181108_ventral_ladder','20181107_dorsal_ladder'};
-% resDirName='half_cross_d_v_area'; inputDirs={'20181116_all5C','20181109_ventralleft_halfladder','20181110_ventralright_halfladder','20181108_ventral_ladder','20181111_dorsalright_halfladder','20181112_dorsalleft_halfladder','20181107_dorsal_ladder'};
-
-
-%select a variable number of directories in the right order if no
-%directories specified yet
-if exist('inputDirs')==0
-count=0;
-uiind=1;
-inputDirs=cell(length(dir)-2,1);%give it maximum length
-while uiind==1
-tempDirs=uigetdir;
-count=count+1;
-inputDirs{count}=tempDirs;
-19617480808180
-if tempDirs==0
-    uiind=0;
-end
-end
-inputDirs(count:end)=[];%delete empty entries
-end
-
-% inputDirs=uigetfile_n_dir(cd, '');%uigetfiles does not select in order
+% resDirName='Fig2D'; inputDirs={'none', 'rightOF', 'leftOF','lateralOF','ventralOF','dorsalOF'};
+% resDirName='Fig2G'; inputDirs={'ventralSwitch_rl', 'ventralSwitch_lr','dorsalSwitch_rl','dorsalSwitch_lr','dorsal_switchgratingLR','dorsal_switchgratingRL'};
+% resDirName='Fig2H'; inputDirs={'ventral_halfOF_l', 'ventral_halfOF_r','dorsal_halfLong_l','dorsal_halfOF_r','dorsal_halfOF_r_long_l','dorsal_halfLong_r','dorsal_halfOF_l','dorsal_halfOF_l_long_r'};
+% resDirName='Fig2I'; inputDirs={'dorsalOF_3cm', 'dorsalOF', 'dorsalOF_12cm'};
+% resDirName='Fig3'; inputDirs={'leftOF', 'dorsalSwitch_rl','dorsalSwitch_rl_leftOF','rightOF','dorsalSwitch_lr','dorsalSwitch_lr_rightOF'};
+% resDirName='Fig4C'; inputDirs={'rightOF', 'dorsal_halfOF_l','dorsal_halfOF_l_rightOF','leftOF','dorsal_halfOF_r','dorsal_halfOF_r_leftOF'};
+% resDirName='Fig2D'; inputDirs={'ventralOF2','dorsalOF2','dorsalOF_ventralOF'};
+% resDirName='FigS2'; inputDirs={'lateralChecker', 'dorsalSwitch_rl','lateralChecker_switch_rl','dorsalSwitch_lr','lateralChecker_switch_lr'};
+resDirName='FigS3C'; inputDirs={'none2', 'ventral_long','ventralOF2','dorsal_long','dorsalOF2','dorsalOF_ventralOF'};
 
 %% initialise variables
 n=length(inputDirs);
@@ -85,8 +54,10 @@ groups=[];
 %% loop through directories and extract data
 
 for i=1:length(inputDirs)
-    cd(inputDirs{i})
-    load comp_measures.mat 
+%     cd(inputDirs{i})
+%     load comp_measures.mat 
+%load .mat files with data
+    load([inputDirs{i},'.mat']);
 
     %extract speed
     speedPercentage=0.1; %what percentage of all speeds as maximum speed
@@ -146,7 +117,7 @@ end
     indStr=strfind(inputDirs{i},'\');
     label{i}=inputDirs{i}(indStr(end)+1:end);
     end
-    cd ..
+%     cd ..
 end
 
 
@@ -390,7 +361,8 @@ group_stats(all_max_speed, groups,plot_label)
 
 %% PLOT AREA OF TRACKING
 % 
-if ~isempty(all_mean_areas)
+%check if all data have the area parameter, if not, skip plot
+try grpstats(all_mean_areas,groups,'sum')
 % MEAN AREA
 plot_label=sprintf('area',speedPercentage*100);
 
@@ -433,7 +405,12 @@ group_stats(all_var_areas, groups,plot_label)
 % for u=1:length(unique(groups))
 % histogram(all_var_areas(groups==u,1),area_sizes);hold on
 % end
+catch
 end
+
+% end
+
+
 
 %stop writing stats into file
 diary off
@@ -453,10 +430,10 @@ set(f6,'PaperPositionMode','auto');print -f6 -dpdf -r300 -painters maxSpeed.eps
 % set(f7,'PaperPositionMode','auto');print -f7 -dpdf -r300 -painters pos1stH.eps
 % set(f8,'PaperPositionMode','auto');print -f8 -dpdf -r300 -painters crossPos1stH.eps
 
-% if ~isempty(all_mean_areas)
+if exist('f9')
 set(f9,'PaperPositionMode','auto');print -f7 -dpdf -r300 -painters area.eps
 set(f10,'PaperPositionMode','auto');print -f8 -dpdf -r300 -painters varArea.eps
-% end
+end
 
 % dir=uigetdir;
 % cd(dir);
