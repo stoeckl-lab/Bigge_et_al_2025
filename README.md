@@ -1,5 +1,5 @@
-# Bigge_et_al_2024
-Analysis files for the publication Bigge et al. (2024) Integration of parallel pathways for flight control in a hawkmoth reflects prevalence and relevance of natural visual cues [LINK]
+# Bigge_et_al_2025
+Analysis files for the publication Bigge et al. (2025) Integration of parallel pathways for flight control in a hawkmoth reflects prevalence and relevance of natural visual cues [https://doi.org/10.7554/eLife.104118.3]
 The raw data for this publication is deposited at https://figshare.com/s/e680da3be83fe172a5e4.
 
 The scripts and functions in this repository build two analysis pipelines. One to extract and process flight tracks from a tunnel setup for hawkmoths, and one to analyse videos of natural visual scenes.  
